@@ -1,9 +1,8 @@
-import java.text.ParseException;
+ import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Scanner;
+ import java.util.*;
 
-public class BankApp {
+ public class BankApp {
     private String customerFirstName;
     private String customerLastName;
     private int age;
@@ -58,8 +57,16 @@ public class BankApp {
     }
 
     public String getUserGender() {
-        this.gender = getValidInput("Please enter your Gender: Male or Female");
-        return this.gender;
+        List<String> allowedGender = List.of("MALE","FEMALE", "M", "F");
+        while (true) {
+            this.gender = getValidInput("Please enter your Gender: Male or Female");
+            if (gender != null && allowedGender.contains(gender.toUpperCase())) {
+                return this.gender;
+            }
+//            else {
+//                System.out.println("Please enter your Gender: Male or Female");
+//            }
+        }
     }
 
     public String getEmail() {
@@ -67,9 +74,26 @@ public class BankApp {
         return this.email;
     }
 
+     public boolean isValidPhoneNumber(int input){
+        // validates the input format has 11 character numbers and starts with a "+"
+         return input == 12;
+     }
     public String getPhoneNumber() {
-        this.phoneNumber = getValidInput("Please enter your Phone Number:");
-        return this.phoneNumber; // Keeping it as String for flexibility
+//        List<String> allowedNumbers = List.of("+0123456789");
+        while (true){
+            this.phoneNumber = getValidInput("Please enter your Phone Number:");
+            if (phoneNumber != null && isValidPhoneNumber(Integer.parseInt(phoneNumber)) ); {
+            return this.phoneNumber;
+            }
+        }
+
+//        String getPhoneNumber;
+//        try {
+//            getPhoneNumber = String.valueOf(scanner.nextLine());
+//        } catch (NumberFormatException e) {
+//            return this.phoneNumber; // Keeping it as String for flexibility
+//        }
+//        return getPhoneNumber;
     }
 
     public String getAddress() {
@@ -110,11 +134,31 @@ public class BankApp {
                 \b GREAT!!!""");
     }
 
+        public String userDetails() {
+            String longIntro = ", welcome to Edozie & co Mortgage bank. We will be reaching out to you through ";
+            String and = " and ";
+            String local = ". Your current location is; ";
+            String birth = ", we will celebrate your special day on: ";
+            String end = "thank you, and once again \b WELCOME!";
+            return ("Dear " +customerFirstName + customerLastName +longIntro +email +and +phoneNumber +local +address +city +state +country
+            +birth +birthDate +end);
+        }
+
     public void registerUser() {
-        customerFirstName = getUserFirstName();
-        customerLastName = getUserLastName();
-        email = getEmail();
-        phoneNumber = getPhoneNumber();
+         getUserFirstName();
+        getUserLastName();
+        getUserGender();
+        getAge();
+        getEmail();
+        getPhoneNumber();
+        getCountry();
+        getState();
+        getCity();
+        getAddress();
+        getBirthDate();
+
+        System.err.println(welcome());
+        System.out.println(userDetails());
     }
 
     public void postRegistration() {
@@ -130,3 +174,4 @@ public class BankApp {
     }
 
 }
+//CREATE A 

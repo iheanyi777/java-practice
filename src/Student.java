@@ -33,11 +33,7 @@ public class Student {
         }
         this.score = inputScore;
 
-
-        //if score is below zero
-
-        //if score is above 100
-
+        
         if (score < 0 || score > 100) {
             return "Invalid grade";
         } else if (score >= 75) {
